@@ -1,0 +1,29 @@
+<h1>Demo/hello.html.erb</h1>
+<p>from hello</p>
+
+<!-- view varibales -->
+<%= 1+1 %>
+<br/>
+<% target = "world" %>
+<%="hello #{target}" %>
+<% 3.times do %>
+  <%="xxx" %>
+  <% end %>
+<!-- instance variable array Exmples -->
+<!-- <%= @array.inspect %> -->
+
+<br/>
+
+<%= @array.each do |n| %>
+<%= n %><br/>
+<% end%>
+<br/>
+<br/>
+<!-- URL parameters -->
+ID: <%=params[:id]%><br/>
+ID: <%= @id %><br/>
+Current Page :<%=@page %><br/>
+Next Page :<%=@page.to_i + 1 %><br/>
+<hr>
+<%= params.inspect %>
+</hr>
