@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
- layout false
+  layout false
 
     def index
       @pages = Page.sorted
@@ -16,7 +16,7 @@ class PagesController < ApplicationController
     def create
       # Instantiate a new object using form parameters
       @page = Page.new(params.require(:page).permit(:subject_id, :name, 
-        :permalink, :position, :visible)
+        :permalink, :position, :visible))
       # @pages = Page.new(subject_params)
       # Save the object
       if @page.save
@@ -46,8 +46,8 @@ class PagesController < ApplicationController
       @page = Page.find(params[:id])
       # Update the Object
       if  @page.update_attributes(params.require(:page).permit(:subject_id, :name, 
-        :permalink, :position, :visible)
-        If update succeeds,redirect to the index action
+        :permalink, :position, :visible))
+       # If update succeeds,redirect to the index action
       flash[:notice] = "Page updated successfully."
       redirect_to(:action => 'show' , :id => @page.id)
       else
