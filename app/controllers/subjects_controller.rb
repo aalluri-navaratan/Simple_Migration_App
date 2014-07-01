@@ -37,8 +37,7 @@ class SubjectsController < ApplicationController
     end
 
     def destroy
-       subject = Subject.find(params[:id])
-       subject.destroy
+       Subject.find(params[:id]).destroy
        redirect_to(:action => 'index')
     end
 
@@ -58,8 +57,8 @@ class SubjectsController < ApplicationController
 
     def delete
         @subject = Subject.find(params[:id])
-        subject.destroy
-        redirect_to(:action => 'index')
+        #subject.destroy
+        #redirect_to(:action => 'index')
     end
   # private
   #    def subject_params
