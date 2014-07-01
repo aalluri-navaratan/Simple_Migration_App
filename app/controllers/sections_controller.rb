@@ -15,8 +15,8 @@ class SectionsController < ApplicationController
 
     def create
       # Instantiate a new object using form parameters
-      @section = Section.new(params.require(:section).permit(:page_id, :name, :position, 
-        :visible, :contenet_type, :visible, :contenet_type, :content))
+      @section = Section.new(params.require(:section).permit(:page_id, 
+        :name, :position, :visible, :content_type, :content))
       # @section = section.new(section_params)
       # Save the object
       if @section.save
@@ -45,8 +45,8 @@ class SectionsController < ApplicationController
       # Find an existing object  using form parameters
       @section = Section.find(params[:id])
       # Update the Object
-      if  @section.update_attributes(params.require(:section).permit(:name,
-       :position, :visible, :contenet_type, :content))
+      if  @section.update_attributes(params.require(:section).permit(:page_id, :name, :position, 
+        :visible, :content_type, :content))
       # If update succeeds,redirect to the index action
       flash[:notice] = "section updated successfully."
       redirect_to(:action => 'show' , :id => @section.id)

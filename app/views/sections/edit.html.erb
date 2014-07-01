@@ -1,25 +1,35 @@
 <%= link_to("<< Back to list",{:action => 'index'}, :class => 'back-link') %>
 
-<div class="subjects edit">
-<h2>Update Subject </h2>
-<%= form_for(:subject, :url => {:action => 'update', :id => @subject.id }) do |f| %>
-  <table summary="Subject from  fields">
+<div class="sections edit">
+<h2>Update Section </h2>
+<%= form_for(:section, :url => {:action => 'update', :id => @section.id }) do |f| %>
+  <table summary="Section from  fields">
     <tr>
-      <th>Name</th>
-        <td><%= f.text_field(:name) %></td>
+      <th>Page Id</th>
+        <td><%= f.text_field(:page_id) %></td>
     </tr>
     <tr>
-      <th>Position</th>
+    <th>Name</th>
+        <td><%= f.text_field(:name) %></td>
+    </tr>
+    <th>Position</th>
         <td><%= f.text_field(:position) %></td>
     </tr>
     <tr>
       <th>Visible</th>
         <td><%= f.text_field(:visible) %></td>
     </tr>
+    <th>Content Type</th>
+        <td><%= f.text_field(:content_type) %></td>
+    </tr>
+    <th>Content</th>
+        <td><%= f.text_field(:content) %></td>
+    </tr>
+
   </table>
 </div>  
   <div class="form-buttons">
-    <%= submit_tag("Update Subject") %>
+    <%= submit_tag("Update Section") %>
   </div>
   <% end %>
 </div>
