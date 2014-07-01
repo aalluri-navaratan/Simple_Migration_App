@@ -1,6 +1,6 @@
 class DemoController < ApplicationController
 
-  layout "admin"
+  layout 'application'
 
   def index
     @array = [1,2,3,4,5]
