@@ -66,4 +66,7 @@ class PagesController < ApplicationController
   #      params.require(:subject).permit(:name, :position, :visible)
   #    end
   # end
+  def escape_output
+    
+  end
 end
