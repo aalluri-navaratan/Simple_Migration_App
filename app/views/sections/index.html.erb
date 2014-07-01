@@ -1,17 +1,12 @@
-<% if !flash[:notice].blank? %>
-  <div class="notice">
-    <%= flash[:notice] %>
-  </div>
-<%  end %>
 <div class="sections index">
 <h2>Subjects </h2>
 <%= link_to("Add New Sections",{:action => 'new'}, :class => 'action new') %>
 <table class ="listing" summary="Page list">
   <tr class="header">
     <th>&nbsp;</th>
+    <th>Position</th>
     <th>Page Id</th>
     <th>Name</th>
-    <th>Position</th>
     <th>Content Type</th>
     <th>Content</th>
     <th>Visible</th>
@@ -20,9 +15,9 @@
   <% @sections.each do |section| %>
   <tr>
     <th>&nbsp;</th>
+    <td><%= section.position %></td>
     <td><%= section.page_id %></td>
     <td><%= section.name %></td>
-    <td><%= section.position %></td>
     <td><%= section.content_type %></td>
     <td><%= section.content %></td>
     <td class="center"><%= section.visible ? 'Yes' : 'No' %></td>

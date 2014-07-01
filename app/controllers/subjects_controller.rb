@@ -1,6 +1,6 @@
 class SubjectsController < ApplicationController
 
-  layout false
+    layout "admin"
 
     def index
     # @subjects = Subject.order("position ASC")
@@ -17,8 +17,8 @@ class SubjectsController < ApplicationController
 
     def create
       # Instantiate a new object using form parameters
-      @subject = Subject.new(params.require(:subject)..permit(:name, :position, 
-        :visible, :contenet_type, :content))
+      @subject = Subject.new(params.require(:subject).permit(:name, :position, 
+        :visible, :content_type, :content))
       # @subject = Subject.new(subject_params)
       # Save the object
       if @subject.save
@@ -47,8 +47,8 @@ class SubjectsController < ApplicationController
       # Find an existing object  using form parameters
       @subject = Subject.find(params[:id])
       # Update the Object
-      if  @subject.update_attributes(params.require(:subject)..permit(:name, :position, 
-        :visible, :contenet_type, :content))
+      if  @subject.update_attributes(params.require(:subject).permit(:name, :position, 
+        :visible, :content_type, :content))
       # If update succeeds,redirect to the index action
       flash[:notice] = "Subject updated successfully."
       redirect_to(:action => 'show' , :id => @subject.id)
