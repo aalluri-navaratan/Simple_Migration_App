@@ -1,30 +1,23 @@
 Rails.application.routes.draw do
- 
-  get 'demo/index'
-
   # get 'subjects/index'
-
   # get 'subjects/show'
-
   # get 'subjects/new'
-
   # get 'subjects/edit'
-
   # get 'subjects/delete'
-
   # get 'demo/index'
-  
-   root "demo#index"
-
-   #get 'demo/hello'
-
-    match ':controller(/:action(/:id))',:via => :get
+  # get 'subjects/index'
+  # get 'subjects/show'
+  # get 'subjects/new'
+  # get 'subjects/edit'
+  # get 'subjects/delete'
+  # get 'demo/index'
+  #get 'demo/hello'
+  root "demo#index"
+  match ':controller(/:action(/:id))',:via => [:get , :post]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
