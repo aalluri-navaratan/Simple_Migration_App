@@ -1,6 +1,8 @@
 class SubjectsController < ApplicationController
 
     layout "admin"
+    
+    before_action :confirm_logged_in
 
     def index
     # @subjects = Subject.order("position ASC")
@@ -67,10 +69,11 @@ class SubjectsController < ApplicationController
         #subject.destroy
         #redirect_to(:action => 'index')
     end
+end
         # private
         #    def subject_params
         #      params.require(:subject).permit(:name, :position, :visible)
         #    end
         # end
-end
+
 

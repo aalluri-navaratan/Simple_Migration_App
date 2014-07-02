@@ -6,6 +6,8 @@ class AccessController < ApplicationController
       # display text & links
   end
 
+  before_action :confirm_logged_in, :except => [:login, :attempt_login, :logout]
+
   def login
       # login form
   end
@@ -19,6 +21,8 @@ class AccessController < ApplicationController
       end
     end
     if authorized_user
+      session[:user_id] = authorized_user.id
+      session[:username] = authorized_user.username
       flash[:notice] = "You are now logged in."
       redirect_to(:action => 'index')
     else
@@ -28,8 +32,21 @@ class AccessController < ApplicationController
   end
 
   def logout
+    session[:user_id] = nil
+    session[:username] = nil
     flash[:notice] = "Logged out"
     redirect_to(:action => 'login')
+  end
+
+  private
+  def confirm_logged_in
+    unless session[:user_id]
+      flash[:notice] = "please log in."
+      redirect_to(:action => 'login')
+      return false #halsts the before_action
+    else
+      return true
+    end
   end
 
 end
