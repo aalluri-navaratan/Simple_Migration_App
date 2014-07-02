@@ -12,28 +12,33 @@ class PagesController < ApplicationController
 
     def new
       @page = Page.new({:name => "Default"})
+      @subjects = Subject.order('position ASC')
+      @page_count = Page.count + 1
     end
 
     def create
       # Instantiate a new object using form parameters
       @page = Page.new(params.require(:page).permit(:subject_id, :name, 
         :permalink, :position, :visible))
-      # @pages = Page.new(subject_params)
-      # Save the object
+        # @pages = Page.new(subject_params)
+        # Save the object
       if @page.save
-      # If save Succeeds,redirect to the index ApplicationController
-      flash[:notice] = "Page created successfully."
-      redirect_to(:action => 'index')
-      # If save fails ,redisplay the form so usre can fix problems
-      
+        # If save Succeeds,redirect to the index ApplicationController
+        flash[:notice] = "Page created successfully."
+        redirect_to(:action => 'index')
+        # If save fails ,redisplay the form so usre can fix problems
       else
-        # render('new')
-        redirect_to(:action => 'new')
+        @subjects = Subject.order('position ASC')
+        @page_count = Page.count + 1
+        render('new')
+        #redirect_to(:action => 'new')
       end
     end
 
     def edit
       @page = Page.find(params[:id])
+      @subjects = Subject.order('position ASC')
+      @page_count = Page.count
     end
 
     def destroy
@@ -48,13 +53,15 @@ class PagesController < ApplicationController
       # Update the Object
       if  @page.update_attributes(params.require(:page).permit(:subject_id, :name, 
         :permalink, :position, :visible))
-       # If update succeeds,redirect to the index action
-      flash[:notice] = "Page updated successfully."
-      redirect_to(:action => 'show' , :id => @page.id)
+        # If update succeeds,redirect to the index ApplicationController
+        flash[:notice] = "Page updated successfully."
+        redirect_to(:action => 'show' , :id => @page.id)
       else
-      #If update succeeds,redirect the form so user can fix problems
-      #render('edit')
-      redirect_to(:action => 'new')
+        #If update succeeds,redirect the form so user can fix problems
+        @subjects = Subject.order('position ASC')
+        @page_count = Page.count
+        render('edit')
+        #redirect_to(:action => 'new')
       end
     end
 

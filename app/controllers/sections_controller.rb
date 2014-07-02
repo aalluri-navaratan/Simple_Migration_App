@@ -21,14 +21,13 @@ class SectionsController < ApplicationController
       # @section = section.new(section_params)
       # Save the object
       if @section.save
-      # If save Succeeds,redirect to the index ApplicationController
-      flash[:notice] = "section created successfully."
-      redirect_to(:action => 'index')
-      # If save fails ,redisplay the form so usre can fix problems
-      
+        # If save Succeeds,redirect to the index ApplicationController
+        flash[:notice] = "section created successfully."
+        redirect_to(:action => 'index')
+        # If save fails ,redisplay the form so usre can fix problems
       else
-        # render('new')
-        redirect_to(:action => 'new')
+        render('new')
+        #redirect_to(:action => 'new')
       end
     end
 
@@ -48,13 +47,13 @@ class SectionsController < ApplicationController
       # Update the Object
       if  @section.update_attributes(params.require(:section).permit(:page_id, :name, :position, 
         :visible, :content_type, :content))
-      # If update succeeds,redirect to the index action
-      flash[:notice] = "section updated successfully."
-      redirect_to(:action => 'show' , :id => @section.id)
+        # If update succeeds,redirect to the index action
+        flash[:notice] = "section updated successfully."
+        redirect_to(:action => 'show' , :id => @section.id)
       else
-      #If update succeeds,redirect the form so user can fix problems
-      #render('edit')
-      redirect_to(:action => 'new')
+        #If update succeeds,redirect the form so user can fix problems
+        render('new')
+        #redirect_to(:action => 'new')
       end
     end
 
@@ -63,9 +62,9 @@ class SectionsController < ApplicationController
         #section.destroy
         #redirect_to(:action => 'index')
     end
-  # private
-  #    def section_params
-  #      params.require(:section).permit(:name, :position, :visible)
-  #    end
-  # end
+        # private
+        #    def section_params
+        #      params.require(:section).permit(:name, :position, :visible)
+        #    end
+        # end
 end

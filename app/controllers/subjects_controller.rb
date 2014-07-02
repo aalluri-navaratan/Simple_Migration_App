@@ -13,34 +13,36 @@ class SubjectsController < ApplicationController
 
     def new
       @subject = Subject.new({:name => "Default"})
+      @subject_count = Subject.count + 1
     end
 
     def create
       # Instantiate a new object using form parameters
       @subject = Subject.new(params.require(:subject).permit(:name, :position, 
-        :visible, :content_type, :content))
-      # @subject = Subject.new(subject_params)
-      # Save the object
+        :visible, :content_type, :content, :created_at))
+        # @subject = Subject.new(subject_params)
+        # Save the object
       if @subject.save
-      # If save Succeeds,redirect to the index ApplicationController
-      flash[:notice] = "Subject created successfully."
-      redirect_to(:action => 'index')
-      # If save fails ,redisplay the form so usre can fix problems
-      
+        # If save Succeeds,redirect to the index ApplicationController
+        flash[:notice] = "Subject created successfully."
+        redirect_to(:action => 'index')
+        # If save fails ,redisplay the form so usre can fix problems
       else
-        # render('new')
-        redirect_to(:action => 'new')
+        @subject_count = Subject.count + 1
+        render('new')
+        #redirect_to(:action => 'new')
       end
     end
 
     def edit
       @subject = Subject.find(params[:id])
+      @subject_count = Subject.count
     end
 
     def destroy
-       subject = Subject.find(params[:id]).destroy
-       flash[:notice] = "Subject '#{subject.name}'  destroyed successfully."
-       redirect_to(:action => 'index')
+      subject = Subject.find(params[:id]).destroy
+      flash[:notice] = "Subject '#{subject.name}'  destroyed successfully."
+      redirect_to(:action => 'index')
     end
 
     def update
@@ -48,14 +50,15 @@ class SubjectsController < ApplicationController
       @subject = Subject.find(params[:id])
       # Update the Object
       if  @subject.update_attributes(params.require(:subject).permit(:name, :position, 
-        :visible, :content_type, :content))
-      # If update succeeds,redirect to the index action
-      flash[:notice] = "Subject updated successfully."
-      redirect_to(:action => 'show' , :id => @subject.id)
+        :visible, :content_type, :content, :created_at))
+        # If update succeeds,redirect to the index action
+        flash[:notice] = "Subject updated successfully."
+        redirect_to(:action => 'show' , :id => @subject.id)
       else
-      #If update succeeds,redirect the form so user can fix problems
-      #render('edit')
-      redirect_to(:action => 'new')
+        #If update succeeds,redirect the form so user can fix problems
+        @subject_count = Subject.count
+        render('edit')
+        #redirect_to(:action => 'new')
       end
     end
 
@@ -64,10 +67,10 @@ class SubjectsController < ApplicationController
         #subject.destroy
         #redirect_to(:action => 'index')
     end
-  # private
-  #    def subject_params
-  #      params.require(:subject).permit(:name, :position, :visible)
-  #    end
-  # end
+        # private
+        #    def subject_params
+        #      params.require(:subject).permit(:name, :position, :visible)
+        #    end
+        # end
 end
 

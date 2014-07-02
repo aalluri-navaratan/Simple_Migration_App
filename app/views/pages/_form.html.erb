@@ -1,7 +1,9 @@
+  <%= error_messages_for(@page) %>
+  
   <table summary="Page from  fields">
     <tr>
-      <th><%= f.label(:subject_id, "Subject_id") %></th>
-        <td><%= f.text_field(:subject_id) %></td>
+      <th><%= f.label(:subject_id, "Subject") %></th>
+        <td><%= f.select(:subject_id, @subjects.map {|s| [s.name, s.id]}) %></td>
     </tr>
     <tr>
       <th><%= f.label(:name) %></th>
