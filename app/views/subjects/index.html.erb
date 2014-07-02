@@ -1,4 +1,4 @@
-<% @page_title ="Subjects" %>
+<% @page_title = 'Subjects' %>
 <div class="subjects index">
 <h2>Subjects </h2>
 <%= image_tag('plug_in.png', :size => '11x11', :alt => '+') %>
@@ -19,6 +19,7 @@
       <td class="center"><%= status_tag(subject.visible) %></td>
       <td class="center"><%= subject.pages.size %></td> 
       <td class="actions">
+        <%= link_to("View Pages",{:controller => 'pages',:subject_id => subject.id}, :class => 'action show') %>
         <%= link_to("Show",{:action => 'show', :id => subject.id}, :class => 
         'action show') %>
         <%= link_to("Edit", {:action => 'edit' , :id => subject.id}, :class => 

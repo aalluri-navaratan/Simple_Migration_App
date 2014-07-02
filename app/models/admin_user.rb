@@ -39,6 +39,17 @@ class AdminUser < ActiveRecord::Base
   validates :email, :presence => true, :length => { :maximum => 100 }, 
     :format => EMAIL_REGEX, :confirmation => true
 
+  validate :username_is_allowed
+  scope :sorted, lambda { order("last_name ASC, first_name ASC")}
+
+  def name
+    "#{first_name} #{last_name}"
+    # Or: first_name + ' ' + last_name
+    # Or: [first_name,last_name].join(' ')
+
+    
+  end
+
   def username_is_allowed
     if   FORBIDDEN_USERNAMES.include?(username)
       errors.add(:username, "has been restricted from use.")
