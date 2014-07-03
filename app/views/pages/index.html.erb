@@ -27,7 +27,7 @@
     <td class="actions">
         <%= link_to("Show",{ :action => 'show', :subject_id => @subject.id ,:id => page.id },
          :class => 'action show') %>
-        <%= link_to("Edit", { :action => 'edit' , { :subject_id => @subject.id, } :id => page.id },
+        <%= link_to("Edit", { :action => 'edit' , :subject_id => @subject.id, :id => page.id },
          :class => 'action edit') %>
         <%= link_to("Delete", { :action => 'delete' , :subject_id => @subject.id, :id => page.id } ,
          :class => 'action delete') %>
