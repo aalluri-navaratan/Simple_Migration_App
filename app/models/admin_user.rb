@@ -46,8 +46,6 @@ class AdminUser < ActiveRecord::Base
     "#{first_name} #{last_name}"
     # Or: first_name + ' ' + last_name
     # Or: [first_name,last_name].join(' ')
-
-    
   end
 
   def username_is_allowed

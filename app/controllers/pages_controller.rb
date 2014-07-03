@@ -3,9 +3,15 @@ class PagesController < ApplicationController
     layout "admin"
 
     before_action :confirm_logged_in
+    before_action :find_subject
 
     def index
-      @pages = Page.sorted
+      # @page = Page.sorted
+      @pages = Page.where(:subject_id => @subject.id).sorted
+      # @pages = @subject.pages.sorted
+      # puts("pages PagesController index")
+      # puts(@pages)
+      # puts(@subject)
     end
 
     def show
@@ -13,7 +19,7 @@ class PagesController < ApplicationController
     end
 
     def new
-      @page = Page.new({:name => "Default"})
+      @page = Page.new({:subject_id => @subject.id,:name => "Default"})
       @subjects = Subject.order('position ASC')
       @page_count = Page.count + 1
     end
@@ -27,13 +33,13 @@ class PagesController < ApplicationController
       if @page.save
         # If save Succeeds,redirect to the index ApplicationController
         flash[:notice] = "Page created successfully."
-        redirect_to(:action => 'index')
+        redirect_to( :action => 'index', :subject_id => @subject.id )
         # If save fails ,redisplay the form so usre can fix problems
       else
         @subjects = Subject.order('position ASC')
         @page_count = Page.count + 1
         render('new')
-        #redirect_to(:action => 'new')
+        # redirect_to(:action => 'new')
       end
     end
 
@@ -46,7 +52,7 @@ class PagesController < ApplicationController
     def destroy
        page = Page.find(params[:id]).destroy
        flash[:notice] = "Page destroyed successfully."
-       redirect_to(:action => 'index')
+       redirect_to(:action => 'index', :subject_id => @subject.id)
     end
 
     def update
@@ -57,13 +63,13 @@ class PagesController < ApplicationController
         :permalink, :position, :visible))
         # If update succeeds,redirect to the index ApplicationController
         flash[:notice] = "Page updated successfully."
-        redirect_to(:action => 'show' , :id => @page.id)
+        redirect_to(:action => 'show' , :id => @page.id, :subject_id => @subject.id)
       else
-        #If update succeeds,redirect the form so user can fix problems
+        # If update succeeds,redirect the form so user can fix problems
         @subjects = Subject.order('position ASC')
         @page_count = Page.count
         render('edit')
-        #redirect_to(:action => 'new')
+        # redirect_to(:action => 'new')
       end
     end
 
@@ -78,4 +84,11 @@ class PagesController < ApplicationController
   def escape_output
     
   end
+
+  private
+    def find_subject
+      if params[:subject_id]
+        @subject = Subject.find(params[:subject_id])
+      end
+    end
 end

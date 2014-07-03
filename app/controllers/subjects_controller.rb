@@ -37,8 +37,11 @@ class SubjectsController < ApplicationController
     end
 
     def edit
-      @subject = Subject.find(params[:id])
-      @subject_count = Subject.count
+     #render :text => "fkdsk"
+     @subject = Subject.find(params[:id])
+
+     #render :text => @subject.inspect and return
+     @subject_count = Subject.count
     end
 
     def destroy

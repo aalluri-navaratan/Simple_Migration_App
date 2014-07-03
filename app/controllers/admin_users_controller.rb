@@ -9,12 +9,12 @@ class AdminUsersController < ApplicationController
     end
     
     def new
-      @admin_user = AdminUser.new
+      @admin_user = AdminUser.new({:username => "Default"})
     end
 
     def create
       @admin_user = AdminUser.new(params.require(:admin_user).permit(:first_name, 
-        :last_name, :username, :password ))
+        :last_name, :email, :username, :password ))
       if @admin_user.save
         flash[:notice] = "AdminUser created successfully."
         redirect_to(:action => 'index')
@@ -38,7 +38,7 @@ class AdminUsersController < ApplicationController
       @admin_user = AdminUser.find( params[:id] )
       # Update the Object
       if  @admin_user.update_attributes( params.require(:admin_user).permit(:first_name, 
-        :last_name, :username, :password ))
+        :last_name, :email, :username, :password ))
         # If update succeeds,redirect to the index ApplicationController
         flash[:notice] = "AdminUser updated successfully."
         redirect_to(:action => 'show' , :id => @admin_user.id )
