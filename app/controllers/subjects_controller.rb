@@ -21,7 +21,8 @@ class SubjectsController < ApplicationController
     def create
       # Instantiate a new object using form parameters
       @subject = Subject.new(params.require(:subject).permit(:name, :position, 
-        :visible, :content_type, :content, :created_at))
+        :visible, :created_at ))
+       #render :text => @subject.inspect and return
         # @subject = Subject.new(subject_params)
         # Save the object
       if @subject.save
@@ -55,7 +56,7 @@ class SubjectsController < ApplicationController
       @subject = Subject.find(params[:id])
       # Update the Object
       if  @subject.update_attributes(params.require(:subject).permit(:name, :position, 
-        :visible, :content_type, :content, :created_at))
+        :visible, :created_at))
         # If update succeeds,redirect to the index action
         flash[:notice] = "Subject updated successfully."
         redirect_to(:action => 'show' , :id => @subject.id)

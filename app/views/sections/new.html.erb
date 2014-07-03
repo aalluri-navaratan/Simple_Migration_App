@@ -1,7 +1,7 @@
 <%= link_to("<< Back to list",{:action => 'index'}, :class => 'back-link') %>
 <div class="pages new">
 <h2>Create Subject </h2>
-<%= form_for(:page, :url => {:action => 'create'}) do |f| %>
+<%= form_for(:section, :url => {:action => 'create'}) do |f| %>
   <table summary="Page from  fields">
   <%= render(:partial => "form",:locals =>{:f => f}) %>
   </table>

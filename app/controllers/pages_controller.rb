@@ -7,11 +7,8 @@ class PagesController < ApplicationController
 
     def index
       # @page = Page.sorted
-      @pages = Page.where(:subject_id => @subject.id).sorted
-      # @pages = @subject.pages.sorted
-      # puts("pages PagesController index")
-      # puts(@pages)
-      # puts(@subject)
+      # @pages = Page.where(:subject_id => @subject.id).sorted
+       @pages = @subject.pages.sorted
     end
 
     def show
